@@ -21,9 +21,11 @@ app.add_middleware(
 )
 
 # Database setup
-MONGO_URL = os.environ.get('MONGO_URL')
-DB_NAME = os.environ.get('DB_NAME')
+MONGO_URL = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
+DB_NAME = os.environ.get('DB_NAME', 'health_assistant_db')
 OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
+
+print(f"Using database: {DB_NAME}")  # Debug print
 
 client = AsyncIOMotorClient(MONGO_URL)
 db = client[DB_NAME]
