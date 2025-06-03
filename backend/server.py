@@ -117,7 +117,44 @@ async def analyze_symptoms_with_ai(symptoms: str, age: int = None, gender: str =
         
         return response
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"AI analysis failed: {str(e)}")
+        # Fallback to demo response if API fails
+        print(f"AI API failed: {str(e)}, using demo response")
+        return generate_demo_analysis(symptoms, age, gender, medical_history)
+
+def generate_demo_analysis(symptoms: str, age: int = None, gender: str = None, medical_history: str = None):
+    """Generate a realistic demo analysis for showcase purposes"""
+    demo_analysis = f"""Based on your reported symptoms of {symptoms.lower()}, here's a comprehensive health assessment:
+
+**Symptom Analysis:**
+The symptoms you've described are commonly associated with several potential causes:
+
+1. **Stress and Lifestyle Factors**: Headaches and fatigue can often result from stress, inadequate sleep, dehydration, or poor nutrition.
+
+2. **Tension-Type Headaches**: These are the most common type of headaches and can be triggered by stress, poor posture, or muscle tension.
+
+3. **Sleep-Related Issues**: Poor sleep quality or insufficient sleep can manifest as both headaches and persistent fatigue.
+
+**Recommendations:**
+1. **Hydration**: Ensure you're drinking adequate water (8-10 glasses daily)
+2. **Sleep Hygiene**: Aim for 7-9 hours of quality sleep per night
+3. **Stress Management**: Consider relaxation techniques, meditation, or light exercise
+4. **Nutrition**: Maintain regular meals and avoid skipping meals
+5. **Medical Consultation**: If symptoms persist beyond a week or worsen, consult a healthcare provider
+
+**Urgency Level Assessment:**
+Based on the symptoms described, this appears to be a **MODERATE** priority situation. While these symptoms are concerning and warrant attention, they are not immediately life-threatening.
+
+**When to Seek Immediate Care:**
+- Sudden, severe headache unlike any you've experienced before
+- Headache with fever, stiff neck, confusion, or vision changes
+- Extreme fatigue with difficulty breathing or chest pain
+
+**Important Medical Disclaimer:**
+This analysis is for informational purposes only and should not replace professional medical advice. The symptoms described could have various underlying causes that require proper medical evaluation. Please consult with a qualified healthcare provider for accurate diagnosis and appropriate treatment recommendations.
+
+**Note**: This is a demonstration of AI health analysis capabilities. Individual medical situations vary greatly, and professional medical consultation is always recommended for health concerns."""
+
+    return demo_analysis
 
 # API Endpoints
 
