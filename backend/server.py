@@ -26,6 +26,7 @@ DB_NAME = os.environ.get('DB_NAME', 'health_assistant_db')
 OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
 
 print(f"Using database: {DB_NAME}")  # Debug print
+print(f"OpenAI API key length: {len(OPENAI_API_KEY) if OPENAI_API_KEY else 'None'}")  # Debug print
 
 client = AsyncIOMotorClient(MONGO_URL)
 db = client[DB_NAME]
